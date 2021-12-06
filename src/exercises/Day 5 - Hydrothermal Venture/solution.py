@@ -65,12 +65,16 @@ def get_coordinates(x1, y1, x2, y2):
 
 
 result = get_result(lines)
-n = 0
-for coordinate, number in result.items():
-    if number > 1:
-        n += 1
 
-print(n)
+# sum dictionary in ugly for loop
+
+# n = 0
+# for coordinate, number in result.items():
+#     if number > 1:
+#         n += 1
+
+# nicer one-line
+print(sum(1 for c in result if result[c] > 1))
 
 end_time = time.time()
 
