@@ -1,2 +1,2 @@
-def get_file(p, filename):
+def get_file():
     print('got the file')
