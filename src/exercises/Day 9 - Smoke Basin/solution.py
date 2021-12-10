@@ -63,29 +63,31 @@ class LowPoint:
         return points
 
 
-def get_directions(lines, line, lines_i, line_i):
-    up = True if lines_i != 0 else False
-    down = True if lines_i != len(lines) - 1 else False
-    left = True if line_i != 0 else False
-    right = True if line_i != len(line) - 1 else False
+def get_directions(lines, line, y, x):
+    up = True if y != 0 else False
+    down = True if y != len(lines) - 1 else False
+    left = True if x != 0 else False
+    right = True if x != len(line) - 1 else False
     return up, down, left, right
 
 
-def is_low_point(lines, line, lines_i, line_i):
-    up, down, left, right = get_directions(lines, line, lines_i, line_i)
+def is_low_point(lines, line, y, x):
+    up, down, left, right = get_directions(lines, line, y, x)
+
+    # neighbors =
 
     check_points = []
     if up:
-        check_points.append(lines[lines_i - 1][line_i])
+        check_points.append(lines[y - 1][x])
     if down:
-        check_points.append(lines[lines_i + 1][line_i])
+        check_points.append(lines[y + 1][x])
     if left:
-        check_points.append(line[line_i - 1])
+        check_points.append(line[x - 1])
     if right:
-        check_points.append(line[line_i + 1])
+        check_points.append(line[x + 1])
 
     for c in check_points:
-        if c <= line[line_i]:
+        if c <= line[x]:
             return False
     return True
 
