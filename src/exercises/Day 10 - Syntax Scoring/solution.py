@@ -1,5 +1,6 @@
 import os
 import time
+from functools import reduce
 
 start_time = time.time()
 
@@ -71,12 +72,13 @@ def get_completion_strings(lines):
     return closing_strings
 
 
-def get_string_complete_score(string):
-    score = 0
-    for s in string:
-        score = score * 5
-        score = score + SCORING_AUTO[s]
-    return score
+def get_string_complete_score(compl_string):
+    return reduce(lambda n, s: n*5 + SCORING_AUTO[s], compl_string, 0)
+    # score = 0
+    # for s in compl_string:
+    #     score = score * 5
+    #     score = score + SCORING_AUTO[s]
+    # return score
 
 
 print(get_syntax_error_score(lines))
