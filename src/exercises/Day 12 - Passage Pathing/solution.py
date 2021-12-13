@@ -1,5 +1,6 @@
 import os
 import time
+from collections import defaultdict
 from termcolor import colored, cprint
 
 start_time = time.time()
@@ -13,17 +14,11 @@ with open(filename) as file:
 
 
 def get_connections(lines):
-    connections = {}
+    connections = defaultdict(list, {})
     for line in lines:
         con = line.split('-')
-        if connections.get(con[0]):
-            connections[con[0]].append(con[1])
-        else:
-            connections[con[0]] = [con[1]]
-        if connections.get(con[1]):
-            connections[con[1]].append(con[0])
-        else:
-            connections[con[1]] = [con[0]]
+        connections[con[0]].append(con[1])
+        connections[con[1]].append(con[0])
     return connections
 
 
