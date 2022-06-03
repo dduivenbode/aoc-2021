@@ -56,7 +56,7 @@ def step_zero(template):
 
 
 def insert_pairs(steps, result, rules):
-    for i in range(steps):
+    for _ in range(steps):
         result = run_step(result, rules)
     return result
     # return line
@@ -82,7 +82,7 @@ def get_count(result, start):
                 n = n + value * 2
             elif el in key:
                 n += value
-        if el == start[0] or el == start[-1]:
+        if el == start[0] or el == start[-1]:  # begin/end of line, not counted double
             n += 1
         count[el] = int(n/2)
 
@@ -92,12 +92,10 @@ def get_count(result, start):
 start = step_zero(template)
 result = insert_pairs(40, start, rules)
 count = get_count(result, template)
-
+mc = Counter(count).most_common()
 
 cprint('\nDay 14 - Extended Polymerization:', 'blue', attrs=['bold'])
 
-c = Counter(count)
-mc = c.most_common()
 print(f'\nMost commmon element {mc[0][0]} occurs {mc[0][1]} times')
 print(f'Least commmon element {mc[-1][0]} occurs {mc[-1][1]} times')
 print(f'{mc[0][1]} - {mc[-1][1]} = {mc[0][1] - mc[-1][1]}')
